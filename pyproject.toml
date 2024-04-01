@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "marky-mark-scheduler"
+version = "0.1.0"
+description = ""
+authors = ["Daniil Bozhko <voc.offacc@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+celery = "^5.3.6"
+redis = "^5.0.3"
+schedule = "^1.2.1"
+pydantic = "^2.6.4"
+pydantic-settings = "^2.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
