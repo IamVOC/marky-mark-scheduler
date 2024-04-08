@@ -7,14 +7,14 @@ jobs:
   setup:
     name: Setup
     runs-on: ubuntu-latest
-    env: test_environment
+    environment: test_environment
     services:      
       postgres:
         image: postgres
         env:
-          POSTGRES_PASSWORD: ${{ environment.DB_PASS }}
-          POSTGRES_USER: ${{ environment.DB_USER }}
-          POSTGRES_DB: ${{ environment.DB_NAME }}
+          POSTGRES_PASSWORD: ${{ vars.DB_PASS }}
+          POSTGRES_USER: ${{ vars.DB_USER }}
+          POSTGRES_DB: ${{ vars.DB_NAME }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
