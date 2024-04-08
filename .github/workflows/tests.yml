@@ -33,6 +33,11 @@ jobs:
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: 1.8.2
+      - name: Add dotenv
+        uses: mravselj/envfile@v1
+        with:
+          secrets: ${{ toJSON(vars) }}
+          file: marky-mark-bot/.env
       - uses: actions/cache@v3
         name: Define a cache for the virtual environment based on the dependencies lock file
         with:
