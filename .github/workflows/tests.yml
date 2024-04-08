@@ -41,5 +41,5 @@ jobs:
       - name: Install deps
         run: poetry install
       - name: Test project
-        run: pytest --cov
+        run: poetry run pytest --cov
 

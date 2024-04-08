@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "marky-mark-scheduler"
+name = "app"
 version = "0.1.0"
 description = ""
 authors = ["Daniil Bozhko <voc.offacc@gmail.com>"]
