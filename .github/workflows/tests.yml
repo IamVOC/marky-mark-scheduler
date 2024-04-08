@@ -1,0 +1,38 @@
+name: Running tests
+on:
+  push:
+  pull_request:
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    environment: test_environment
+    services:      
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: ${{ environment.DB_PASS }}
+          POSTGRES_USER: ${{ environment.DB_USER }}
+          POSTGRES_DB: ${{ environment.DB_NAME }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Setup poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 1.8.2
+      - name: Test project
+        run: pytest --cov
+

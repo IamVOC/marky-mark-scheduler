@@ -1,4 +1,6 @@
 __pycache__
 poetry.lock
 .env
+.coverage
+.pytest_cache
 celerybeat-schedule

@@ -9,5 +9,5 @@ class Student(Base):
     __tablename__ = 'students'
 
     student_guid: Mapped[str] = mapped_column(UUID, primary_key=True)
-    sudent_name: Mapped[str]
+    student_name: Mapped[str]
     chat_id: Mapped[Optional[int]]
