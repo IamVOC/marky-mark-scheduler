@@ -33,6 +33,11 @@ jobs:
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: 1.8.2
+      - uses: actions/cache@v3
+        name: Define a cache for the virtual environment based on the dependencies lock file
+        with:
+          path: ./.venv
+          key: venv-${{ hashFiles('poetry.lock') }}
       - name: Install deps
         run: poetry install
       - name: Test project
