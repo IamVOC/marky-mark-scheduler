@@ -13,9 +13,9 @@ class StudentsSubgroupRepository(IStudentsSubgroupRepository):
         self._session = session
 
     def get_students_chatid_by_subgroup(self, subgroup_id: int) -> List[int]:
-        stmt = select(Student.chat_id).where(
-                StudentsSubgroup.student_guid == Student.student_guid).where(
-                StudentsSubgroup.subgroup_id == subgroup_id) 
-        res = [r for r, in self._session.execute(stmt)]
-        self._session.close()
-        return res
+        stmt = (select(Student.chat_id)
+                .join(StudentsSubgroup)
+                .where(StudentsSubgroup.subgroup_id == subgroup_id)
+        )
+        with self._session as session:
+            return [r for r, in session.execute(stmt)]

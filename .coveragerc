@@ -1,0 +1,7 @@
+[coverage:run]
+omit =
+	*/__init__.py
+	app/abstractions/*
+	app/utils.py
+	app/main.py
+	app/config.py

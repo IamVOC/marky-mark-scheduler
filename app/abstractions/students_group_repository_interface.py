@@ -5,5 +5,5 @@ from typing import List
 class IStudentsGroupRepository(ABC):
 
     @abstractmethod
-    def get_students_chatid_by_subgroup(self, group_id: int) -> List[int]:
+    def get_students_chatid_by_group(self, group_id: int) -> List[int]:
         pass
