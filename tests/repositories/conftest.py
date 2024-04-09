@@ -7,6 +7,7 @@ from app.models.group import Group
 from app.models.student import Student
 from app.models.subgroup import Subgroup
 from app.models.students_subgroup import StudentsSubgroup
+from app.models.banned_subject import BannedSubject
 
 
 @pytest.fixture(scope='module', autouse=True)
@@ -37,10 +38,12 @@ def setup_db():
                                                          {'student_guid': '37e671c6-67b5-4077-83ed-93e621cd21d2',
                                                           'subgroup_id': 3}
                                                          ])
+    banned_subjects_query = insert(BannedSubject).values([{'subject_id': 1}, {'subject_id': 2}])
     session.execute(group_query)
     session.execute(subgroup_query)
     session.execute(students_query)
     session.execute(association_query)
+    session.execute(banned_subjects_query)
     session.commit()
     session.close()
     yield
