@@ -19,6 +19,4 @@ class StudentsGroupRepository(IStudentsGroupRepository):
                 .join(Subgroup)
                 .where(Subgroup.group_id == group_id)
         )
-        print(stmt)
-        with self._session as session:
-            return [r for r, in session.execute(stmt)]
+        return [r for r, in self._session.execute(stmt)]

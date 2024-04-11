@@ -5,5 +5,5 @@ from app.config import get_settings
 
 
 engine = create_engine(get_settings().DB_URL)
-Session = sessionmaker(bind=engine, autoflush=False)
+Session_make = sessionmaker(bind=engine, autoflush=False)
 

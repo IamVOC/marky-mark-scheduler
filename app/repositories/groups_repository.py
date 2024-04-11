@@ -13,5 +13,4 @@ class GroupRepository(IGroupRepository):
 
     def get_all_groups(self) -> List[int]:
         stmt = select(Group.group_id)
-        with self._session as session:
-            return [r for r, in session.execute(stmt)]
+        return [r for r, in self._session.execute(stmt)]

@@ -17,5 +17,4 @@ class StudentsSubgroupRepository(IStudentsSubgroupRepository):
                 .join(StudentsSubgroup)
                 .where(StudentsSubgroup.subgroup_id == subgroup_id)
         )
-        with self._session as session:
-            return [r for r, in session.execute(stmt)]
+        return [r for r, in self._session.execute(stmt)]

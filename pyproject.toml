@@ -17,6 +17,9 @@ psycopg = "^3.1.18"
 psycopg2-binary = "^2.9.9"
 pytest = "^8.1.1"
 pytest-cov = "^5.0.0"
+requests = "^2.31.0"
+pytz = "^2024.1"
+pytest-mock = "^3.14.0"
 
 
 [build-system]

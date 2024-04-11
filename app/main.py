@@ -5,17 +5,17 @@ from app.config import get_settings
 
 
 settings = get_settings()
-app = Celery('main', broker=settings.REDIS_URL)
+celery = Celery('main', broker=settings.REDIS_URL)
 
-app.autodiscover_tasks(['app.tasks.schedule'])
+celery.autodiscover_tasks(['app.tasks.schedule'])
 
-app.conf.beat_schedule = {
+celery.conf.beat_schedule = {
         'get-timetable-every-day-for-groups': {
             'task': 'schedule.get_timetable',
             'schedule': 3,
         }
     }
 
-app.conf.timezone = settings.TIMEZONE
+celery.conf.timezone = settings.TIMEZONE
 
 

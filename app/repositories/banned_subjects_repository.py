@@ -13,5 +13,4 @@ class BannedSubjectsRepository(IBannedSubjectsRepository):
 
     def get_all_subjects(self) -> List[int]:
         stmt = select(BannedSubject.subject_id)
-        with self._session as session:
-            return [r for r, in session.execute(stmt)]
+        return [r for r, in self._session.execute(stmt)]
