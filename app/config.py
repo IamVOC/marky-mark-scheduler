@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
+    TOKEN: str
     TIMEZONE: str
 
     @property
@@ -23,6 +24,10 @@ class Settings(BaseSettings):
     @property
     def DB_URL(self) -> str:
         return f'postgresql+psycopg2://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
+
+    @property
+    def TELEGRAM_URL(self) -> str:
+        return f'https://api.telegram.org/bot{self.TOKEN}'
 
 @lru_cache
 def get_settings() -> Settings:

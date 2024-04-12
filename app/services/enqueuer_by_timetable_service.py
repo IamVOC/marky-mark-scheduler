@@ -16,7 +16,8 @@ from app.repositories.groups_repository import GroupRepository
 from app.repositories.banned_subjects_repository import BannedSubjectsRepository
 from app.repositories.students_subgroup_repository import StudentsSubgroupRepository
 from app.repositories.students_group_repository import StudentsGroupRepository
-from app.tasks.default.tasks import send_notification
+from app.tasks.default.tasks import send_notification_task
+from app.values.subject import Subject
 
 
 class EnqueuerByTimetableService(IEnqueuerByTimetableService):
@@ -32,13 +33,21 @@ class EnqueuerByTimetableService(IEnqueuerByTimetableService):
                     # Checking that subject not banned
                     if subject['disciplineOid'] in banned_subjects:
                         continue
+                    value = Subject(subject_id=subject['disciplineOid'],
+                                    subject_name=subject['discipline'],
+                                    date=current_date,
+                                    begin_lesson_time=subject['beginLesson'],
+                                    end_lesson_time=subject['endLesson'],
+                                    lecturer_name=subject['lecturer_title'],
+                                    auditorium=subject['auditorium'])
+                    
                     # Calculating countdown for message task
                     lesson_begin_time = get_time_from_string(subject['beginLesson'])
                     delta_to_lesson_begin = get_remaining_seconds_until_time(lesson_begin_time)
 
                     chat_ids = self._get_chat_ids_by_subjects_subgroup(session, subject, group_id)
                     for chat_id in chat_ids:
-                        send_notification.apply_async(args=[chat_id], countdown=delta_to_lesson_begin)
+                        send_notification_task.apply_async(args=[chat_id, value], countdown=delta_to_lesson_begin)
 
     def _get_chat_ids_by_subjects_subgroup(self, session: Session, subject: dict, group_id: int):
         if subject['subGroupOid']:
